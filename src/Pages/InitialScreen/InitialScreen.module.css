@@ -1,0 +1,17 @@
+.bgColor {
+	background-color: #464646;
+}
+
+.container {
+	background-color: #464646;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 3rem;
+	width: 30%;
+}
+
+.btnContainer {
+	display: flex;
+}

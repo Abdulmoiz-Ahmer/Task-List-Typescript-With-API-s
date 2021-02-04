@@ -1,0 +1,13 @@
+.label {
+	display: block;
+	color: #ffffff;
+	margin-top: 0.3rem;
+}
+.input {
+	border-radius: 5px;
+}
+
+.error {
+	color: #ff9900;
+	font-size: 12px;
+}

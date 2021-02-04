@@ -1,0 +1,18 @@
+.bgColor {
+	background-color: #464646;
+	padding: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 30%;
+	margin: 5rem auto;
+}
+
+.itemOne {
+	flex: 1;
+}
+
+.itemTwo {
+	flex-shrink: 0;
+	flex-basis: 50px;
+}
