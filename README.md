@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Before running add .env file at root of project and add following instruction:
+REACT_APP_BASE_URL='https://api-nodejs-todolist.herokuapp.com'
+
 ## Available Scripts
 
 In the project directory, you can run:
