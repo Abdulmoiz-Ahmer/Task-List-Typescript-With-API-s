@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { CustomInput } from '../Elements/CustomInput';
 import { CustomButton } from '../Elements/CustomButton';
 import styles from './LoginComponent.module.css';
@@ -7,6 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../../Contexts/UserContext';
+
 
 type login = {
     email: string,
@@ -19,7 +21,7 @@ type register = {
 
 type res = {
     data: {
-        data: register & login,
+        user: register & login,
         token: string
     }
     status: number
@@ -33,7 +35,7 @@ const schema = yup.object().shape({
 export const LoginComponent = () => {
 
     const history = useHistory();
-
+    const { setUserState } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
@@ -43,9 +45,8 @@ export const LoginComponent = () => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`, {
             ...data
         }).then((response: res) => {
-            if (response.status == 200) {
-                console.log(response.data);
-                console.log(response.data.token);
+            if (response.status === 200) {
+                setUserState(response.data.user);
                 localStorage.setItem('userTaskToken', response.data.token);
                 history.push('/tasks');
             } else if (response.status === 400) {

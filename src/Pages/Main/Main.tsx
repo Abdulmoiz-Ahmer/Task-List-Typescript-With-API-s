@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from './main.module.css';
 import { CustomToggleButton } from '../../components/Elements/CustomToggleButton';
 import { useHistory } from 'react-router-dom';
 import { AddItemComponent } from '../../components/AddItemComponent/AddItemComponent';
 import { TaskListComponent } from '../../components/TaskList/TaskList';
 import axios from 'axios';
+import { UserContext } from '../../Contexts/UserContext';
 
 type res = {
     data: {
@@ -16,7 +17,7 @@ type res = {
 
 export const Main = () => {
     const [tasks, setTasks] = useState<Array<Task>>([]);
-
+    const { user } = useContext(UserContext);
     const history = useHistory();
 
 
@@ -73,7 +74,7 @@ export const Main = () => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <div className={`${styles.headerItem} ${styles.headerItemOne}`}>My Tasks</div>
+                <div className={`${styles.headerItem} ${styles.headerItemOne}`}>{user.name} Tasks</div>
                 <div className={`${styles.headerItem} ${styles.headerItemTwo}`}><CustomToggleButton label={'LogOut'} type={'button'} click={() => {
                     localStorage.removeItem('userTaskToken');
                     history.push('/');

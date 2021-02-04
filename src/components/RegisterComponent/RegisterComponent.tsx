@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CustomInput } from '../Elements/CustomInput';
 import { CustomButton } from '../Elements/CustomButton';
 import { useForm } from 'react-hook-form';
@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../Contexts/UserContext';
 
 type register = {
     name: string,
@@ -16,7 +17,7 @@ type register = {
 
 type res = {
     data: {
-        data: register
+        user: register,
         token: string
     }
     status: number
@@ -32,6 +33,7 @@ const schema = yup.object().shape({
 export const RegisterComponent = () => {
 
     const history = useHistory();
+    const { setUserState } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
@@ -41,19 +43,16 @@ export const RegisterComponent = () => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/user/register`, {
             ...data
         }).then((response: res) => {
-            // console.log(response);
-            if (response.status == 201) {
-                console.log(response.data);
-                console.log(response.data.token);
+            if (response.status === 201) {
+                // console.log(response.data);
+                // console.log(response.data.token);
+                setUserState(response.data.user);
+
                 localStorage.setItem('userTaskToken', response.data.token);
                 history.push('/tasks');
-
             } else if (response.status === 400) {
                 console.log("something went wrong");
-
             }
-
-
 
         }).catch(error => {
             console.log(error);
