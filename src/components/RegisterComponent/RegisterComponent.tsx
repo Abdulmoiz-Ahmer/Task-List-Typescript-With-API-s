@@ -50,6 +50,7 @@ export const RegisterComponent: React.FC = () => {
             if (response.status === 201) {
                 setUserState(response.data.user);
                 localStorage.setItem('userTaskToken', response.data.token);
+                localStorage.setItem('userData', JSON.stringify(response.data.user));
                 history.push('/tasks');
             } else if (response.status === 400) {
                 console.log("something went wrong");

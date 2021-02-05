@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import { UserContext } from './Contexts/UserContext';
 
 function App() {
-  const [user, setUser] = useState({name:"John Doe"});
+  const [user, setUser] = useState({name:""});
 
   const setUserState = (user: {
     age: number,

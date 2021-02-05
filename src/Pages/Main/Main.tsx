@@ -29,7 +29,7 @@ type res = {
 
 export const Main: React.FC = () => {
     const [tasks, setTasks] = useState<Array<Task>>([]);
-    const { user } = useContext(UserContext);
+    const { user, setUserState } = useContext(UserContext);
     const history = useHistory();
 
 
@@ -37,8 +37,12 @@ export const Main: React.FC = () => {
 
         if (!localStorage.getItem('userTaskToken')) {
             history.push('/');
-
         }
+
+        if (user.name === "" && localStorage.getItem('userData')) {
+            setUserState(JSON.parse(localStorage.getItem('userData') || '{name:"John Doe"}'));
+        }
+
         axios.get(`${process.env.REACT_APP_BASE_URL}/task`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userTaskToken')}`
