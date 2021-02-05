@@ -92,7 +92,7 @@ export const Main = () => {
                 <Spacer />
                 <Box>
                     <Menu>
-                        <MenuButton as={Button}>
+                        <MenuButton as={Button} colorScheme={'purple'}>
                             {user?.name}
                         </MenuButton>
                         <MenuList>

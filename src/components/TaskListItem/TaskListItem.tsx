@@ -12,15 +12,14 @@ export const TaskListItem: React.FC<Props> = ({ task, deleteTaskParent }) => {
         <Flex align={'center'} borderBottomWidth={1} mt={2} mb={2}>
             <Text>{task.description}</Text>
             <Spacer />
-            <Box>
-                <CustomButton
-                    label='-'
-                    type='button'
-                    click={() => {
-                        deleteTaskParent(task._id)
-                    }}
-                />
-            </Box>
+            <CustomButton
+                label='-'
+                type='button'
+                click={() => {
+                    deleteTaskParent(task._id)
+                }}
+                color='red'
+            />
         </Flex>
     );
 };

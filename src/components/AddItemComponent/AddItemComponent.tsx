@@ -70,6 +70,7 @@ export const AddItemComponent = (props: { addTask: (task: Task) => void }) => {
                     label='+'
                     type='submit'
                     disableButton={disableButton}
+                    color='green'
                 />
             </Flex>
         </form>
