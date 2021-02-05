@@ -7,7 +7,7 @@ import {
     Center
 } from "@chakra-ui/react";
 
-export const CustomTextArea = ({ label, type, name, register, error = '', placeholder = '' }: customInputProps) => {
+export const CustomTextArea: React.FC<customInputProps> = ({ label, type, name, register, error = '', placeholder = '' }: customInputProps) => {
     return (
         <FormControl id={name} mt={5} isInvalid={error !== ''}>
             <FormLabel>{label}</FormLabel>

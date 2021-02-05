@@ -14,9 +14,12 @@ type login = {
 const schema = yup.object().shape({
     description: yup.string().required(),
 });
+interface addItemComponent {
+    addTask: (task: Task) => void
+}
 
 
-export const AddItemComponent = (props: { addTask: (task: Task) => void }) => {
+export const AddItemComponent: React.FC<addItemComponent> = (props: addItemComponent) => {
 
     const [disableButton, setDisableButton] = useState(false);
 

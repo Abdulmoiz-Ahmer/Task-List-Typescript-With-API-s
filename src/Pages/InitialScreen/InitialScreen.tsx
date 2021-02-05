@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import styles from './InitialScreen.module.css';
+import React from 'react';
 import { LoginComponent } from '../../components/LoginComponent/LoginComponent';
 import { RegisterComponent } from '../../components/RegisterComponent/RegisterComponent';
 import { Container } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
-export const InitialScreen = () => {
+export const InitialScreen: React.FC = () => {
     return (
         <Container>
             <Tabs isFitted variant="enclosed">

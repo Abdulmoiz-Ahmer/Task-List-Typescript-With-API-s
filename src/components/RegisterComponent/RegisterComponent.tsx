@@ -31,7 +31,7 @@ const schema = yup.object().shape({
     password: yup.string().required().test('len', 'Password must be at least 8 alphanumeric characters and symbols', val => val ? val.toString().length >= 8 : false),
 });
 
-export const RegisterComponent = () => {
+export const RegisterComponent: React.FC = () => {
 
     const history = useHistory();
     const [isButtonLoading, setIsButtonLoading] = useState(false);

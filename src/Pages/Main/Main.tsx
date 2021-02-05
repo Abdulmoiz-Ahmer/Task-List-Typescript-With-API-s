@@ -27,7 +27,7 @@ type res = {
     status: number
 }
 
-export const Main = () => {
+export const Main: React.FC = () => {
     const [tasks, setTasks] = useState<Array<Task>>([]);
     const { user } = useContext(UserContext);
     const history = useHistory();

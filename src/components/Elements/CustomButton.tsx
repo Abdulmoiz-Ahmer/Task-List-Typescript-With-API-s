@@ -10,7 +10,7 @@ interface customButtonProps {
     click?: () => void,
     isLoading?: boolean
 }
-export const CustomButton = ({ label, type, color = '', disableButton = false, click, isLoading = false }: customButtonProps) => {
+export const CustomButton: React.FC<customButtonProps> = ({ label, type, color = '', disableButton = false, click, isLoading = false }: customButtonProps) => {
     return (
         <div>
             {color !== '' && <Button mt={5} type={type} disabled={disableButton} onClick={click} isLoading={isLoading} colorScheme={color}>{label}</Button>}
