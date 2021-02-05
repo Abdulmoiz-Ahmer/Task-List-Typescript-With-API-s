@@ -12,9 +12,9 @@ interface customButtonProps {
 }
 export const CustomButton = ({ label, type, color = '', disableButton = false, click, isLoading = false }: customButtonProps) => {
     return (
-        <Center color="white">
+        <div>
             {color !== '' && <Button mt={5} type={type} disabled={disableButton} onClick={click} isLoading={isLoading} colorScheme={color}>{label}</Button>}
             {color === '' && <Button mt={5} type={type} disabled={disableButton} onClick={click} isLoading={isLoading} >{label}</Button>}
-        </Center >
+        </div>
     );
 }

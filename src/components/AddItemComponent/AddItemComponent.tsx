@@ -52,7 +52,7 @@ export const AddItemComponent = (props: { addTask: (task: Task) => void }) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
 
-            <Flex mb={5}>
+            <Flex mb={5} align="center">
                 <Box>
                     <CustomTextArea
                         label='Description'

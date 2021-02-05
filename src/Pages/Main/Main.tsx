@@ -96,9 +96,9 @@ export const Main = () => {
                             {user?.name}
                         </MenuButton>
                         <MenuList>
-                            <MenuGroup title="Profile">
+                            {/* <MenuGroup title="Profile">
                                 <MenuItem>My Profile</MenuItem>
-                            </MenuGroup>
+                            </MenuGroup> */}
                             <MenuDivider />
                             <MenuGroup>
                                 <MenuItem onClick={() => {
