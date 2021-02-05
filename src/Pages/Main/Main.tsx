@@ -17,6 +17,7 @@ import {
     Heading,
     Button,
     Container,
+    Progress
 } from "@chakra-ui/react"
 
 type res = {
@@ -30,6 +31,7 @@ type res = {
 export const Main: React.FC = () => {
     const [tasks, setTasks] = useState<Array<Task>>([]);
     const { user, setUserState } = useContext(UserContext);
+    const [isLoadingList, setIsLoadingList] = useState(false);
     const history = useHistory();
 
 
@@ -42,6 +44,8 @@ export const Main: React.FC = () => {
         if (user.name === "" && localStorage.getItem('userData')) {
             setUserState(JSON.parse(localStorage.getItem('userData') || '{name:"John Doe"}'));
         }
+
+        setIsLoadingList(!isLoadingList);
 
         axios.get(`${process.env.REACT_APP_BASE_URL}/task`, {
             headers: {
@@ -56,6 +60,8 @@ export const Main: React.FC = () => {
         }).catch(error => {
             console.log(error);
             console.log("something went wrong");
+        }).finally(() => {
+            setIsLoadingList(false);
         })
     }, [])
 
@@ -119,7 +125,8 @@ export const Main: React.FC = () => {
                 <AddItemComponent addTask={addTask} />
             </Container>
 
-            <Container mt={10} borderWidth={2} borderRadius={10}>
+            <Container mt={10} borderWidth={2} borderRadius={10} p={5}>
+                {isLoadingList && <Progress size="sm" isIndeterminate />}
                 <TaskListComponent userTasks={tasks} deleteTask={deleteTask} />
             </Container>
         </div>
