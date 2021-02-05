@@ -1,11 +1,23 @@
 import React, { useEffect, useState, useContext } from 'react';
-import styles from './main.module.css';
-import { CustomToggleButton } from '../../components/Elements/CustomToggleButton';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AddItemComponent } from '../../components/AddItemComponent/AddItemComponent';
 import { TaskListComponent } from '../../components/TaskList/TaskList';
-import axios from 'axios';
 import { UserContext } from '../../Contexts/UserContext';
+import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuGroup,
+    MenuDivider,
+    Flex,
+    Spacer,
+    Box,
+    Heading,
+    Button,
+    Container,
+} from "@chakra-ui/react"
 
 type res = {
     data: {
@@ -32,7 +44,7 @@ export const Main = () => {
                 'Authorization': `Bearer ${localStorage.getItem('userTaskToken')}`
             }
         }).then((response: res) => {
-            if (response.status == 200) {
+            if (response.status === 200) {
                 setTasks(response.data.data);
             } else if (response.status === 400) {
                 console.log("something went wrong");
@@ -56,7 +68,7 @@ export const Main = () => {
             }
         }).then((response: res) => {
 
-            if (response.status == 200) {
+            if (response.status === 200) {
                 let tempTasks = [...tasks];
                 tempTasks.splice(tempTasks.findIndex(function (i) {
                     return i._id === _id;
@@ -72,21 +84,40 @@ export const Main = () => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <div className={`${styles.headerItem} ${styles.headerItemOne}`}>{user.name} Tasks</div>
-                <div className={`${styles.headerItem} ${styles.headerItemTwo}`}><CustomToggleButton label={'LogOut'} type={'button'} click={() => {
-                    localStorage.removeItem('userTaskToken');
-                    history.push('/');
-                }} /></div>
-            </div>
-            <div>
-                <AddItemComponent addTask={addTask} />
-            </div>
-            <div className={`${styles.bgColor}`} >
-                <TaskListComponent userTasks={tasks} deleteTask={deleteTask} />
-            </div>
+        <div>
+            <Flex borderWidth="1px" p={8}>
+                <Box p="2">
+                    <Heading size="md"> Tasks</Heading>
+                </Box>
+                <Spacer />
+                <Box>
+                    <Menu>
+                        <MenuButton as={Button}>
+                            {user?.name}
+                        </MenuButton>
+                        <MenuList>
+                            <MenuGroup title="Profile">
+                                <MenuItem>My Profile</MenuItem>
+                            </MenuGroup>
+                            <MenuDivider />
+                            <MenuGroup>
+                                <MenuItem onClick={() => {
+                                    localStorage.removeItem('userTaskToken');
+                                    history.push('/');
+                                }}>LogOut</MenuItem>
+                            </MenuGroup>
+                        </MenuList>
+                    </Menu>
+                </Box>
+            </Flex>
 
+            <Container mt={10} borderWidth={2} borderRadius={10}>
+                <AddItemComponent addTask={addTask} />
+            </Container>
+
+            <Container mt={10} borderWidth={2} borderRadius={10}>
+                <TaskListComponent userTasks={tasks} deleteTask={deleteTask} />
+            </Container>
         </div>
     );
 }

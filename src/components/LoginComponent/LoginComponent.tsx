@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CustomInput } from '../Elements/CustomInput';
 import { CustomButton } from '../Elements/CustomButton';
 import styles from './LoginComponent.module.css';
@@ -32,16 +32,17 @@ const schema = yup.object().shape({
     password: yup.string().required(),
 });
 
-export const LoginComponent = () => {
+export const LoginComponent:React.FC = () => {
 
     const history = useHistory();
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
     const { setUserState } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
-
     const onSubmit = (data: login) => {
+        setIsButtonLoading(!isButtonLoading);
         axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`, {
             ...data
         }).then((response: res) => {
@@ -56,6 +57,8 @@ export const LoginComponent = () => {
         }).catch(error => {
             console.log(error);
             console.log("something went wrong");
+        }).finally(() => {
+            setIsButtonLoading(!isButtonLoading);
         })
 
     }
@@ -79,7 +82,7 @@ export const LoginComponent = () => {
             <CustomButton
                 label='Login'
                 type='submit'
-                classNamee=''
+                isLoading={isButtonLoading}
             />
         </form>
     );

@@ -1,12 +1,20 @@
 import React from 'react';
-import styles from './CustomTextArea.module.css';
+import {
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    Textarea,
+    Center
+} from "@chakra-ui/react";
 
-export const CustomTextArea = ({ label, type, name, register, error = '' }: customInputProps) => {
+export const CustomTextArea = ({ label, type, name, register, error = '', placeholder = '' }: customInputProps) => {
     return (
-        <div>
-            <label className={styles.label}>{label}</label>
-            <textarea className={styles.input} name={name} cols={40} rows={5} ref={register}></textarea>
-            <div className={styles.error}>{error}</div>
-        </div>
+        <FormControl id={name} mt={5} isInvalid={error !== ''}>
+            <FormLabel>{label}</FormLabel>
+            <Textarea type={type} name={name} ref={register} size={"lg"} placeholder={placeholder} />
+            <Center>
+                <FormErrorMessage>{error}</FormErrorMessage>
+            </Center>
+        </FormControl>
     );
 }

@@ -10,10 +10,11 @@ interface User {
 	age: number;
 }
 
-interface customInputProps{
-    name:string,
-    type:string,
-    label:string,
-    error:string,
-    register: (Ref:any, RegisterOptions?:any) => void
+interface customInputProps {
+	name: string;
+	type: string;
+	label: string;
+	error: string;
+	register: (Ref: any, RegisterOptions?: any) => void;
+	placeholder?: string;
 }

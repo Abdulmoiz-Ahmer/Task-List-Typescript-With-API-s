@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CustomInput } from '../Elements/CustomInput';
 import { CustomButton } from '../Elements/CustomButton';
 import { useForm } from 'react-hook-form';
@@ -33,30 +33,31 @@ const schema = yup.object().shape({
 export const RegisterComponent = () => {
 
     const history = useHistory();
+    const [isButtonLoading, setIsButtonLoading] = useState(false);
+
     const { setUserState } = useContext(UserContext);
     const { register, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
     });
 
     const onSubmit = (data: register) => {
+        setIsButtonLoading(!isButtonLoading);
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/user/register`, {
             ...data
         }).then((response: res) => {
             if (response.status === 201) {
-                // console.log(response.data);
-                // console.log(response.data.token);
                 setUserState(response.data.user);
-
                 localStorage.setItem('userTaskToken', response.data.token);
                 history.push('/tasks');
             } else if (response.status === 400) {
                 console.log("something went wrong");
             }
-
         }).catch(error => {
             console.log(error);
             console.log("something went wrong");
+        }).finally(() => {
+            setIsButtonLoading(!isButtonLoading);
         })
     }
 
@@ -97,7 +98,7 @@ export const RegisterComponent = () => {
             <CustomButton
                 label='Register'
                 type='submit'
-                classNamee=''
+                isLoading={isButtonLoading}
             />
         </form>
     );

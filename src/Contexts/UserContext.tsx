@@ -1,10 +1,12 @@
 import React from 'react';
 
 const UserContext = React.createContext({
-	user: {},
+	user: {
+		name:"John Doe"
+	},
 	setUserState: (user: {
-		age?: number,
-		name?: string,
+		age: number,
+		name: string,
 		_id?: string
 	}) => { }
 });
