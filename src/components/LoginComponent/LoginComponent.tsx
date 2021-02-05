@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { CustomInput } from '../Elements/CustomInput';
 import { CustomButton } from '../Elements/CustomButton';
-import styles from './LoginComponent.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -32,7 +31,7 @@ const schema = yup.object().shape({
     password: yup.string().required(),
 });
 
-export const LoginComponent:React.FC = () => {
+export const LoginComponent: React.FC = () => {
 
     const history = useHistory();
     const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -64,7 +63,7 @@ export const LoginComponent:React.FC = () => {
     }
 
     return (
-        <form className={styles.bgColor} onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <CustomInput
                 label='Email'
                 name='email'

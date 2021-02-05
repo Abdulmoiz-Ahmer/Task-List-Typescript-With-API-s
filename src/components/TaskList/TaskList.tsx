@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import styles from './TaskList.module.css';
 import { TaskListItem } from '../TaskListItem/TaskListItem';
 
 
@@ -14,7 +12,7 @@ export const TaskListComponent: React.FC<text> = ({ userTasks, deleteTask }) => 
         deleteTask(_id);
     }
     return (
-        <div className={styles.bgColor}>
+        <div>
             {
                 userTasks.map((task: Task) => {
                     return (
