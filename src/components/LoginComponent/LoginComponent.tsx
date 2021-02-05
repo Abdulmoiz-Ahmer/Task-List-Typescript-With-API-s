@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../../Contexts/UserContext';
-
+import { Center } from '@chakra-ui/react';
 
 type login = {
     email: string,
@@ -78,11 +78,14 @@ export const LoginComponent: React.FC = () => {
                 register={register}
                 error={errors && errors.password && errors.password.message ? errors.password.message : ''}
             />
-            <CustomButton
-                label='Login'
-                type='submit'
-                isLoading={isButtonLoading}
-            />
+            <Center>
+                <CustomButton
+                    label='Login'
+                    type='submit'
+                    isLoading={isButtonLoading}
+                />
+            </Center>
+
         </form>
     );
 }
